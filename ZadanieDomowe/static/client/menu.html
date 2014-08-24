@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>List of menu cards</h1>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if menus_pags.has_previous %}
+            <a href="?page={{ menus_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ menus_pags.number }} of {{ menus_pags.paginator.num_pages }}.
+        </span>
+
+        {% if menus_pags.has_next %}
+            <a href="?page={{ menus_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in menus_pags.paginator.page_range %}
+		  {% if page == menus_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Categories</div>
+	<table class="table">
+	<thead>
+	<tr>
+	<td> Name </td>
+	<td> Created At </td>
+	<td> Number of dishes </td>
+	</tr>
+	</thead>
+	<tbody>
+	{% for entry in menus_pags %}
+		<tr>
+	    <td><a href="/client/details_menu/{{ entry.id }}">{{ entry.name }}</a></td>
+	    <td><a href="/client/details_menu/{{ entry.id }}">{{ entry.creation_date }}</a></td>
+		<td><a href="/client/details_menu/{{ entry.id }}">{{ entry.dishes.count }}</a></td>
+	    </tr>
+	{% endfor  %}
+	</tbody>
+	</table>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if menus_pags.has_previous %}
+            <a href="?page={{ menus_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ menus_pags.number }} of {{ menus_pags.paginator.num_pages }}.
+        </span>
+
+        {% if menus_pags.has_next %}
+            <a href="?page={{ menus_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in menus_pags.paginator.page_range %}
+		  {% if page == menus_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Project</title>
+        <link href="/static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="/static/css/docs/docs.min.css" rel="stylesheet"></link>
+        <link href="/static/css/docs.min.css" rel="stylesheet"></link>
+        <link id="bs-theme-stylesheet" rel="stylesheet" data-href="/static/css/bootstrap-theme.min.css" href="data:text/css;charset=utf-8,"></link>
+        <script type="text/javascript" src="/static/javascript/jquery/jquery-2.1.1.min.js"></script>
+        <script src="/static/javascript/bootstrap/bootstrap.min.js"></script>
+        <script src="/static/javascript/bootstrap/boototstrap-datepicker.js"></script>
+        <script src="/static/javascript/docs/docs.min.js"></script>
+    </head>
+ {% load staticfiles %}
+    <body role="document">
+		{% include "top_menu.html" %}
+		<div id="content" class="bs-docs-header">
+			<div class="container">
+				<h1>Zadanie Domowe</h1>
+				<p>Program prezentuje menu restauracji.</p>
+				<div id="carbonads-container">
+					<div class="carbonad">
+						<div id="azcarbon"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container bs-docs-container">
+			<div class="row">
+		    	<div class="col-md-3">
+		    		{% include "side_menu.html" %}
+		    	</div>
+				<div class="col-md-9" role="main">
+					{% if successes != None %}
+					{% for entry in successes %}
+						<div class="alert alert-success" role="alert">{{ entry }}</div>
+					{% endfor  %}
+					{% endif %}
+					{% if infos != None %}
+					{% for entry in infos %}
+						<div class="alert alert-info" role="alert">{{ entry }}</div>
+					{% endfor  %}
+					{% endif %}
+					{% if warnings != None %}
+					{% for entry in warnings %}
+						<div class="alert alert-warning" role="alert">{{ entry }}</div>
+					{% endfor  %}
+					{% endif %}
+					{% if dangers != None %}
+					{% for entry in dangers %}
+						<div class="alert alert-danger" role="alert">{{ entry }}</div>
+					{% endfor  %}
+					{% endif %}
+					{% block content %}{% endblock %}
+		    	</div>
+		    </div>
+	    </div>
+	    {% include "footer.html" %}
+    </body>
+	<script type="text/javascript">
+    	$(document).ready(
+
+    	    function()
+			{
+    	    $("#butt").click(
+    	    function()
+    	    {
+    	    	alert('DWA');
+    	    	var isHidden  = $('#butt2').is(':hidden');
+    	    	alert("isHiggedn: " + isHidden);
+    	    	if ($("butt2").is(':hidden')) {
+    	    		alert("jlk");
+    	    		$("#butt2").hide("slow",
+    	    	    		function() { alert('Właśnie ukryłeś akapit'); } );
+    	    	} else {
+    	    		$("#butt2").toggle(2000);
+    	    		$("#butt2").text("To jest nowy tekst");
+    	    	}
+    	    });
+    	    });
+	</script>
+</html>

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Moja Strona </h1>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if menus_pags.has_previous %}
+            <a href="?page={{ menus_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ menus_pags.number }} of {{ menus_pags.paginator.num_pages }}.
+        </span>
+
+        {% if menus_pags.has_next %}
+            <a href="?page={{ menus_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in menus_pags.paginator.page_range %}
+		  {% if page == menus_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}&sort={{ sort }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">menus</div>
+	<table class="table">
+	<thead>
+	<tr>
+	<td> <a href="?sort=name&page={{ page_number }}">Name</a></td>
+	<td> Created At </td>
+	<td><a href="?sort=number&page={{ page_number }}">Number of dishes</a></td>
+	<td> </td>
+	<td> </td>
+	</tr>
+	</thead>
+	<tbody>
+	{% for entry in menus_pags %}
+		<tr>
+	    <td>{{ entry.name }}</td>
+	    <td>{{ entry.creation_date }}</td>
+		<td>{{ entry.dishes.count }}</td>
+	    <td>
+	    <form method="post" action="/menu/edit_menu/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Edit"/>
+	    </form>
+	    </td>
+	    <td>
+	    <form method="post" action="/menu/delete_menu/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Delete"/>
+	    </form>
+	    </td>
+	    </tr>
+	{% endfor  %}
+	</tbody>
+	</table>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if menus_pags.has_previous %}
+            <a href="?page={{ menus_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ menus_pags.number }} of {{ menus_pags.paginator.num_pages }}.
+        </span>
+
+        {% if menus_pags.has_next %}
+            <a href="?page={{ menus_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in menus_pags.paginator.page_range %}
+		  {% if page == menus_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}&sort={{ sort }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+{% endblock %}

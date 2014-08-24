@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Moja Strona </h1>
+{% load staticfiles %}
+<div class="pagination">
+    <span class="step-links">
+        {% if dishes_pags.has_previous %}
+            <a href="?page={{ dishes_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ dishes_pags.number }} of {{ dishes_pags.paginator.num_pages }}.
+        </span>
+
+        {% if dishes_pags.has_next %}
+            <a href="?page={{ dishes_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in dishes_pags.paginator.page_range %}
+		  {% if page == dishes_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Dishes</div>
+	<table class="table">
+	<thead>
+	<tr>
+	<td></td>
+	<td> Name </td>
+	<td> Created At </td>
+	<td> Price </td>
+	<td> Picture </td>
+	<td> </td>
+	<td> </td>
+	</tr>
+	</thead>
+	<tbody>
+	{% for entry in dishes_pags %}
+		<tr>
+		<td>{{ entry.id }}</td>
+	    <td>{{ entry.name }}</td>
+	    <td>{{ entry.creation_date }}</td>
+	    <td>{% if entry.picture.url %}<img src="{{ entry.picture.url }}" height="60" width="60"/>{% endif %}</td>
+	    <td>{{ entry.price }}</td>
+	    <td>
+	    <form method="post" action="/menu/edit_dish/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Edit"/>
+	    </form>
+	    </td>
+	    <td>
+	    <form method="post" action="/menu/delete_dish/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Delete"/>
+	    </form>
+	    </td>
+	    </tr>
+	{% endfor  %}
+	</tbody>
+	</table>
+</div>
+<div>
+<ul class="pagination">
+		{% for page in dishes_pags.paginator.page_range %}
+		  {% if page == dishes_pags.number %}
+		    <li class="active"><a href="#">{{ page }}</a></li>
+		  {% else %}
+		    <li><a href="?page={{ page }}">{{ page }}</a></li>
+		  {% endif %}
+		{% endfor %}
+</ul>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if dishes_pags.has_previous %}
+            <a href="?page={{ dishes_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ dishes_pags.number }} of {{ dishes_pags.paginator.num_pages }}.
+        </span>
+
+        {% if dishes_pags.has_next %}
+            <a href="?page={{ dishes_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

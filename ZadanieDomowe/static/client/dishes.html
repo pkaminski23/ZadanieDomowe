@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Moja Strona </h1>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if categories_pags.has_previous %}
+            <a href="?page={{ categories_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ categories_pags.number }} of {{ categories_pags.paginator.num_pages }}.
+        </span>
+
+        {% if categories_pags.has_next %}
+            <a href="?page={{ categories_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div class="pagination">
+    <span class="step-links">
+		{% for page in categories_pags.paginator.page_range %}
+		  {% if page == categories_pags.number %}
+		    {{ page }}
+		  {% else %}
+		    <a href="?page={{ page }}">{{ page }}</a>
+		  {% endif %}
+		{% endfor %}
+    </span>
+</div>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Categories</div>
+	<table class="table">
+	<thead>
+	<tr>
+	<td> Name </td>
+	<td> Slug </td>
+	<td> </td>
+	<td> </td>
+	</tr>
+	</thead>
+	<tbody>
+	{% for entry in categories_pags %}
+		<tr>
+	    <td>{{ entry.name }}</td>
+	    <td>{{ entry.slug|safe }}<td/>
+	    <td>
+	    <form method="post" action="/news/edit_category/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Edit"/>
+	    </form>
+	    </td>
+	    <td>
+	    <form method="post" action="/news/delete_category/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Delete"/>
+	    </form>
+	    </td>
+	    </tr>
+	{% endfor  %}
+	</tbody>
+	</table>
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if categories_pags.has_previous %}
+            <a href="?page={{ categories_pags.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ categories_pags.number }} of {{ categories_pags.paginator.num_pages }}.
+        </span>
+
+        {% if categories_pags.has_next %}
+            <a href="?page={{ categories_pags.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div class="pagination">
+    <span class="step-links">
+		{% for page in categories_pags.paginator.page_range %}
+		  {% if page == categories_pags.number %}
+		    {{ page }}
+		  {% else %}
+		    <a href="?page={{ page }}">{{ page }}</a>
+		  {% endif %}
+		{% endfor %}
+    </span>
+</div>
+{% endblock %}

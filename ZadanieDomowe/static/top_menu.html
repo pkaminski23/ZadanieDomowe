@@ -1,0 +1,51 @@
+<header id="top" class="navbar navbar-static-top bs-docs-nav" role="banner">
+<div class="container">
+	<div class="navbar-header">
+	<button class="navbar-toggle" data-target=".bs-navbar-collapse" data-toggle="collapse" type="button">
+	<span class="sr-only">Toggle navigation</span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	<span class="icon-bar"></span>
+	</button>
+	</div>
+		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+		<ul class="nav navbar-nav">
+			{% if top_menu == "Home" %}
+			<li class="active">
+			{% else %}
+			<li>
+			{% endif %}
+			<a href="/home">Home</a>
+			</li>
+			{% if user.is_superuser %}
+			{% if top_menu == "Menu" %}
+			<li class="active">
+			{% else %}
+			<li>
+			{% endif %}
+			<a href="/menu">Menu</a>
+			</li>
+			{% endif %}
+			{% if user.is_authenticated %}
+			{% if top_menu == "Client" %}
+			<li class="active">
+			{% else %}
+			<li>
+			{% endif %}
+			<a href="/client">Client</a>
+			</li>
+			{% endif %}
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+			<a href="about">About</a>
+			</li>
+			{% if user.is_authenticated %}
+			<li><a href="/logout_user">{{ user.username }} Logout!</a></li>
+			{% else %}
+			<li><a href="/login_user">Login</a></li>
+			{% endif %}
+		</ul>
+		</nav>
+</div>
+</header>

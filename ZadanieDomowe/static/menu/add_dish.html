@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Moja Strona </h1>
+<form method="post" action="add_dish" enctype="multipart/form-data">
+{% csrf_token %}
+ <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      {{ form.name }} {{ form.name.errors }}
+    </div>
+  </div>
+ <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Price</label>
+    <div class="col-sm-10">
+      {{ form.price }} {{ form.price.errors }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-2 control-label">Picture</label>
+    <div class="col-sm-10">
+      {{ form.picture }} {{ form.picture.errors }}
+    </div>
+  </div>
+<p>
+<input class="btn btn-primary" type="button" onclick="submit()" value="Submit"/>
+<input class="btn btn-default" type="button" href="news" value="Cancel"/>
+</p>
+</form>
+{% endblock %}

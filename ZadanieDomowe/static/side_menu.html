@@ -1,0 +1,89 @@
+<div class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top" role="complementary">
+ <ul class="nav bs-docs-sidenav">
+  {% if top_menu == "Home" %}
+ <li class="active">
+ {% else %}
+ <li>
+ {% endif %}
+  <a href="/home">Home</a>
+  <ul class="nav">
+    {% if side_menu == "About" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/about">About</a></li>
+    {% if side_menu == "Login" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/login_user">Login</a></li>
+    {% if side_menu == "Logout" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/logout_user">Logout</a></li>
+  </ul>
+</li>
+{% if user.is_superuser %}
+ {% if top_menu == "Menu" %}
+ <li class="active">
+ {% else %}
+ <li>
+ {% endif %}
+<a href="/menu">Menu</a>
+  <ul class="nav">
+    {% if side_menu == "Menu" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/menu/menu">Menu</a></li>
+    {% if side_menu == "Add_Menu" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/menu/add_menu">Add Menu</a></li>
+    {% if side_menu == "Dishes" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/menu/dishes">Dishes</a></li>
+    {% if side_menu == "Add_Dish" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/menu/add_dish">Add Dish</a></li>
+	{% if side_menu == "Clients_Errors" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/menu/clients_errors">Błędy klienta</a></li>
+  </ul>
+</li>
+{% endif %}
+{% if user.is_authenticated %}
+ {% if top_menu == "Client" %}
+ <li class="active">
+ {% else %}
+ <li>
+ {% endif %}
+<a href="/client">Client</a>
+  <ul class="nav">
+	{% if side_menu == "Menu" %}
+      <li class="active">
+ 	{% else %}
+      <li>
+    {% endif %}
+    <a href="/client/menu">Menu</a></li>
+  </ul>
+</li>
+{% endif %}
+</ul>
+</div>

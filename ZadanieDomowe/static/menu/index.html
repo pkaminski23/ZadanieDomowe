@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Moja Strona </h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">News</div>
+	<table class="table">
+	<thead>
+	<tr>
+	<td> Tittle </td>
+	<td> Text </td>
+	<td> Posted </td>
+	<td> </td>
+	<td> </td>
+	</tr>
+	</thead>
+	<tbody>
+	{% for entry in news %}
+		<tr>
+	    <td>{{ entry.title }}</td>
+	    <td>{{ entry.text|safe }}<td/>
+	    <td>{{ entry.posted_date|date:"Y.m.d H:i" }}</td>
+	    <td>
+	    <form method="post" action="/news/edit_news/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Edit"/>
+	    </form>
+	    </td>
+	    <td>
+	    <form method="post" action="/news/delete_news/{{entry.id}}/">
+	    {% csrf_token %}
+	    <input type="button" class="btn btn-default navbar-btn" onclick="submit()" value="Delete"/>
+	    </form>
+	    </td>
+	    </tr>
+	{% endfor  %}
+	</tbody>
+	</table>
+</div>
+
+{% if is_paginated %}
+    <hr>
+    {% if page_obj.has_next %}
+        <a href="./?page={{ page_obj.next_page_number }}">starsze</a>
+    {% endif %}
+    {% if page_obj.has_previous %}
+        <a href="./?page={{ page_obj.previous_page_number }}">nowsze</a>
+    {% endif %}
+{% endif %}
+{% endblock %}

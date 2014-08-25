@@ -66,7 +66,7 @@ def error_menu(request, menu_index):
         form_save = ErrorForm(request.POST)
         if form_save.is_valid():
             form_save.save()
-            print "ok"
+            ctx['successes'].append("You comment has been added.")
         else:
             print "not ok"
     else:

@@ -2,6 +2,7 @@
 	Potrzebne moduly:
 	a) pillow
 	b) south
+	c) django-simple-captcha
 	Uruchomienie:
 	a) Aby uruchomic aplikacje nalezy najpierw uruchomic python manage.py syncdb
 	b) python manage.py migrate

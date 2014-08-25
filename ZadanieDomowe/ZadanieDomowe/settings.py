@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'menu',
     'client',
     'south',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (

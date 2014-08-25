@@ -8,15 +8,18 @@ from django.forms import ModelForm
 from django import forms
 from models import Error
 from menu.models import Menu
+from captcha.fields import CaptchaField
 
 class ErrorForm(ModelForm):
+    captcha = CaptchaField()
+    
     class Meta:
         model = Error
         fields = ['data', 'email', 'menu']
         widgets = {
             'data': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
-             'menu': forms.Select(attrs={'class': 'form-control', 'readonly':'readonly'})
+            'menu': forms.Select(attrs={'class': 'form-control', 'readonly':'readonly'})
         }
 
 if __name__ == '__main__':

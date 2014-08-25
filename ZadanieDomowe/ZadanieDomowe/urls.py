@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^menu/', include('menu.urls')),
     url(r'^client/', include('client.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^captcha/', include('captcha.urls')),
      url(r'^%s/(?P<path>.*)$'%ZadanieDomowe.settings.MEDIA_URL.strip('/'),
             'django.views.static.serve', {
                 'document_root': ZadanieDomowe.settings.MEDIA_ROOT,
